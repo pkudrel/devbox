@@ -4,3 +4,4 @@
 * text
 *.sh text eol=lf
 *.zip binary
+*.7z binary
