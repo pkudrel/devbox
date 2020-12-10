@@ -18,7 +18,7 @@ cinst googlechrome
 cinst microsoftazurestorageexplorer
 cinst nodejs
 cinst pycharm-community
-cinst python
+cinst python --install-directory=":C:\tools\python"
 cinst sysinternals -y
 cinst vscode
 cinst windirstat
