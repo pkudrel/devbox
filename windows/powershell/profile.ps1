@@ -19,6 +19,12 @@ Import-Module-With-Measure DockerCompletion
 if ($host.Name -eq 'ConsoleHost')
 {
     Import-Module-With-Measure PSReadLine
+    Set-PSReadLineKeyHandler -Key Tab -Function Complete
+    Set-PSReadLineOption -HistoryNoDuplicates -EditMode Windows
+    Set-PSReadLineOption -PredictionSource History
+    #Set-PSReadLineOption -PredictionViewStyle ListView
+    Set-PSReadLineOption -PredictionViewStyle InlineView
+    Set-PSReadLineOption -ShowToolTips
 }
 
 
