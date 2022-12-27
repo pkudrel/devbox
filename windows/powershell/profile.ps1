@@ -26,11 +26,11 @@ if ($host.Name -eq 'ConsoleHost') {
     Set-PSReadLineOption -ShowToolTips
     Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
     Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
-    Set-PSReadLineKeyHandler -Chord "Ctrl+f" -Function ForwardWord
+    Set-PSReadLineKeyHandler -Chord "Ctrl+RightArrow" -Function ForwardWord
 }
 
 
-#Add oh-my-posh and Paradox theme
+# Add oh-my-posh and Paradox theme
 # INSTALL: winget install JanDeDobbeleer.OhMyPosh -s winget
 # UPGRADE: winget upgrade JanDeDobbeleer.OhMyPosh -s winget
 oh-my-posh init pwsh | Invoke-Expression
