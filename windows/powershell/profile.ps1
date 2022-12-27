@@ -13,7 +13,6 @@ function Import-Module-With-Measure {
 
 Import-Module-With-Measure posh-git
 $env:POSH_GIT_ENABLED = $true
-Import-Module-With-Measure oh-my-posh
 Import-Module-With-Measure Terminal-Icons
 Import-Module-With-Measure DockerCompletion
 if ($host.Name -eq 'ConsoleHost') {
@@ -25,14 +24,17 @@ if ($host.Name -eq 'ConsoleHost') {
     #Set-PSReadLineOption -PredictionViewStyle ListView
     Set-PSReadLineOption -PredictionViewStyle InlineView
     Set-PSReadLineOption -ShowToolTips
+    Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
+    Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
+    Set-PSReadLineKeyHandler -Chord "Ctrl+f" -Function ForwardWord
 }
 
 
-#Set-Theme Paradox
-#Set-PoshPrompt -Theme Paradox
-Set-PoshPrompt -Theme W:\DenebLab\devbox\windows\windows-terminal\paradox.omp.json
-
-## Aliases
+#Add oh-my-posh and Paradox theme
+# INSTALL: winget install JanDeDobbeleer.OhMyPosh -s winget
+# UPGRADE: winget upgrade JanDeDobbeleer.OhMyPosh -s winget
+oh-my-posh init pwsh | Invoke-Expression
+oh-my-posh init pwsh --config 'W:\DenebLab\devbox\windows\windows-terminal\paradox.omp.json' | Invoke-Expression
 
 function OpenPSProfileFile { code $Home\Documents\PowerShell\Profile.ps1 }
 function DockerKillContainerFn ([string]$ContainerName) {
@@ -48,5 +50,8 @@ function DockerKillContainerFn ([string]$ContainerName) {
    
 }
 
-Set-Alias psprof OpenPSProfileFile -Option ReadOnly
+
+## Aliases
+
+Set-Alias psProfile OpenPSProfileFile -Option ReadOnly
 Set-Alias dkKillContainer DockerKillContainerFn -Option ReadOnly
