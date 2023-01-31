@@ -1,0 +1,6 @@
+Windows Registry Editor Version 5.00
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\DOS Devices]
+"W:"="\\??\\C:\\Users\\piotr\\!work"
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\DOS Devices]
+"Q:"="\\??\\C:\\Users\\piotr\\!others"
