@@ -1,6 +1,26 @@
 # file: C:\Users\piotr\Documents\PowerShell\profile.ps1
-# 
-# 
+
+######
+###### INSTALL
+######
+
+# Clone https://github.com/pkudrel/devbox to W:\DenebLab\devbox
+
+# Add oh-my-posh and Paradox theme
+# INSTALL: winget install JanDeDobbeleer.OhMyPosh -s winget
+# UPGRADE: winget upgrade JanDeDobbeleer.OhMyPosh -s winget
+
+## posh-git
+# PowerShellGet\Install-Module posh-git -Scope CurrentUser -Force
+
+## Terminal-Icons
+# Install-Module -Name Terminal-Icons -Repository PSGallery
+
+## DockerCompletion
+# Install-Module DockerCompletion -Scope CurrentUser
+
+
+
 # helper
 function Import-Module-With-Measure {  
     param ($ModuleName)
@@ -30,9 +50,6 @@ if ($host.Name -eq 'ConsoleHost') {
 }
 
 
-# Add oh-my-posh and Paradox theme
-# INSTALL: winget install JanDeDobbeleer.OhMyPosh -s winget
-# UPGRADE: winget upgrade JanDeDobbeleer.OhMyPosh -s winget
 oh-my-posh init pwsh | Invoke-Expression
 oh-my-posh init pwsh --config 'W:\DenebLab\devbox\windows\windows-terminal\paradox.omp.json' | Invoke-Expression
 
