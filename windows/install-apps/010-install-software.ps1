@@ -31,6 +31,7 @@ InstallPackage "Microsoft.PowerShell"
 InstallPackage "JanDeDobbeleer.OhMyPosh"
 InstallPackage "Microsoft.WindowsTerminal"
 InstallPackage "Microsoft.VisualStudioCode"
+InstallPackage "Google.Chrome"
 Install-Module PSReadLine -AllowPrerelease -Force
 # 
 (new-object Net.WebClient).DownloadString("https://raw.githubusercontent.com/dotnet-script/dotnet-script/master/install/install.ps1") | iex
