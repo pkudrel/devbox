@@ -36,6 +36,7 @@ InstallPackage "Google.Chrome"
 InstallPackage "IrfanSkiljan.IrfanView"
 InstallPackage "Atlassian.Sourcetree"
 InstallPackage "ES-Computing.EditPlus"
+InstallPackage "Microsoft.Azure.StorageExplorer"
 
 Install-Module PSReadLine -AllowPrerelease -Force
 
