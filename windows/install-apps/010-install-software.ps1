@@ -24,6 +24,7 @@ function InstallPackage($pack) {
 }
 
 ####### BEGIN
+# InstallPackage "SMPlayer.SMPlayer" - not working
 
 InstallPackage "Microsoft.DotNet.SDK.6"
 InstallPackage "Microsoft.DotNet.SDK.7"
@@ -32,7 +33,15 @@ InstallPackage "JanDeDobbeleer.OhMyPosh"
 InstallPackage "Microsoft.WindowsTerminal"
 InstallPackage "Microsoft.VisualStudioCode"
 InstallPackage "Google.Chrome"
+InstallPackage "IrfanSkiljan.IrfanView"
+InstallPackage "Atlassian.Sourcetree"
+InstallPackage "ES-Computing.EditPlus"
+
 Install-Module PSReadLine -AllowPrerelease -Force
-# 
+
+# use this one - works better, for  dotnet-script
 (new-object Net.WebClient).DownloadString("https://raw.githubusercontent.com/dotnet-script/dotnet-script/master/install/install.ps1") | iex
 # dotnet tool install -g dotnet-script
+
+
+Write-host "Done"
