@@ -37,6 +37,7 @@ InstallPackage "IrfanSkiljan.IrfanView"
 InstallPackage "Atlassian.Sourcetree"
 InstallPackage "ES-Computing.EditPlus"
 InstallPackage "Microsoft.Azure.StorageExplorer"
+InstallPackage "gerardog.gsudo"
 
 Install-Module PSReadLine -AllowPrerelease -Force
 
