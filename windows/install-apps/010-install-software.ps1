@@ -38,6 +38,7 @@ InstallPackage "Atlassian.Sourcetree"
 InstallPackage "ES-Computing.EditPlus"
 InstallPackage "Microsoft.Azure.StorageExplorer"
 InstallPackage "gerardog.gsudo"
+InstallPackage "7zip.7zip"
 
 Install-Module PSReadLine -AllowPrerelease -Force
 
