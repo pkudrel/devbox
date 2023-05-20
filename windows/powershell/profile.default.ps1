@@ -28,8 +28,8 @@ function Import-Module-With-Measure {
     param ($ModuleName)
     $import = Measure-Command {
         Import-Module $ModuleName
-    }
-    Write-Host "$ModuleName import $($import.TotalMilliseconds) ms"
+    } 
+    Write-Host "$ModuleName import $([Math]::Round($import.TotalMilliseconds)) ms"
 }
 
 
