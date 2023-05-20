@@ -3,3 +3,6 @@
 ## OneDrive
 Import-Module -DisableNameChecking $PSScriptRoot\030-install-clean-data\030-install-clean-onedrive.ps1
 RemoveOneDrive
+
+## Exclude from Windows Defender
+Add-MpPreference -ExclusionPath C:\Users\piotr\!work
