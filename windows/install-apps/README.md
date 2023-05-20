@@ -22,6 +22,5 @@ CurrentUserCurrentHost : C:\Users\piotr\Documents\PowerShell\Microsoft.PowerShel
 - copy `!work\DenebLab\devbox\windows\powershell\profile.ps1` to `$HOME\Documents\PowerShell\profile.ps1`
 - `010-install-software.ps1`
 - `oh-my-posh font install` - `Meslo LGM NF` - https://ohmyposh.dev/docs/installation/fonts
-- `020-install-settings.ps1`
 - `030-install-clean.ps1` - clening
 
