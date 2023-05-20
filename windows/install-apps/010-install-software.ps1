@@ -44,7 +44,7 @@ InstallPackage "Microsoft.AzureCLI"
 Install-Module PSReadLine -AllowPrerelease -Force
 
 # use this one - works better, for  dotnet-script
-(new-object Net.WebClient).DownloadString("https://raw.githubusercontent.com/dotnet-script/dotnet-script/master/install/install.ps1") | iex
+(new-object Net.WebClient).DownloadString("https://raw.githubusercontent.com/dotnet-script/dotnet-script/master/install/install.ps1") | Invoke-Expression
 # dotnet tool install -g dotnet-script
 
 

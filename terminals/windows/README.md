@@ -1,4 +1,0 @@
-# Windows setup
-- fonts
-- ConEmu
-

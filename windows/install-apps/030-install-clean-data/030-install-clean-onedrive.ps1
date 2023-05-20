@@ -1,4 +1,4 @@
-function Takeown-Registry($key) {
+function TakeownRegistry($key) {
     # TODO does not work for all root keys yet
     switch ($key.split('\')[0]) {
         "HKEY_CLASSES_ROOT" {
@@ -32,7 +32,7 @@ function Takeown-Registry($key) {
     $key.SetAccessControl($acl)
 }
 
-function Takeown-File($path) {
+function TakeownFile($path) {
     takeown.exe /A /F $path
     $acl = Get-Acl $path
 
@@ -47,19 +47,19 @@ function Takeown-File($path) {
     Set-Acl -Path $path -AclObject $acl
 }
 
-function Takeown-Folder($path) {
-    Takeown-File $path
+function TakeownFolder($path) {
+    TakeownFile $path
     foreach ($item in Get-ChildItem $path) {
         if (Test-Path $item -PathType Container) {
-            Takeown-Folder $item.FullName
+            TakeownFolder $item.FullName
         }
         else {
-            Takeown-File $item.FullName
+            TakeownFile $item.FullName
         }
     }
 }
 
-function Elevate-Privileges {
+function ElevatePrivileges {
     param($Privilege)
     $Definition = @"
     using System;
@@ -100,7 +100,7 @@ function Elevate-Privileges {
     $type[0]::EnablePrivilege($processHandle, $Privilege)
 }
 
-function force-mkdir($path) {
+function ForceMakeDir($path) {
     if (!(Test-Path $path)) {
         #Write-Host "-- Creating full path to: " $path -ForegroundColor White -BackgroundColor DarkGreen
         New-Item -ItemType Directory -Force -Path $path
@@ -112,59 +112,54 @@ function force-mkdir($path) {
 
 function RemoveOneDrive {
    
-    echo "73 OneDrive process and explorer"
-taskkill.exe /F /IM "OneDrive.exe"
-taskkill.exe /F /IM "explorer.exe"
+    Write-Output "73 OneDrive process and explorer"
+    taskkill.exe /F /IM "OneDrive.exe"
+    taskkill.exe /F /IM "explorer.exe"
 
-echo "Remove OneDrive"
-if (Test-Path "$env:systemroot\System32\OneDriveSetup.exe") {
-    & "$env:systemroot\System32\OneDriveSetup.exe" /uninstall
-}
-if (Test-Path "$env:systemroot\SysWOW64\OneDriveSetup.exe") {
-    & "$env:systemroot\SysWOW64\OneDriveSetup.exe" /uninstall
-}
-
-echo "Disable OneDrive via Group Policies"
-force-mkdir "HKLM:\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\OneDrive"
-sp "HKLM:\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\OneDrive" "DisableFileSyncNGSC" 1
-
-echo "Removing OneDrive leftovers trash"
-rm -Recurse -Force -ErrorAction SilentlyContinue "$env:localappdata\Microsoft\OneDrive"
-rm -Recurse -Force -ErrorAction SilentlyContinue "$env:programdata\Microsoft OneDrive"
-rm -Recurse -Force -ErrorAction SilentlyContinue "C:\OneDriveTemp"
-
-echo "Remove Onedrive from explorer sidebar"
-New-PSDrive -PSProvider "Registry" -Root "HKEY_CLASSES_ROOT" -Name "HKCR"
-mkdir -Force "HKCR:\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}"
-sp "HKCR:\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" "System.IsPinnedToNameSpaceTree" 0
-mkdir -Force "HKCR:\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}"
-sp "HKCR:\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" "System.IsPinnedToNameSpaceTree" 0
-Remove-PSDrive "HKCR"
-
-echo "Removing run option for new users"
-reg load "hku\Default" "C:\Users\Default\NTUSER.DAT"
-reg delete "HKEY_USERS\Default\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "OneDriveSetup" /f
-reg unload "hku\Default"
-
-echo "Removing startmenu junk entry"
-rm -Force -ErrorAction SilentlyContinue "$env:userprofile\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\OneDrive.lnk"
-
-echo "Restarting explorer..."
-start "explorer.exe"
-
-echo "Wait for EX reload.."
-sleep 15
-
-echo "Removing additional OneDrive leftovers"
-foreach ($item in (ls "$env:WinDir\WinSxS\*onedrive*")) {
-    Takeown-Folder $item.FullName
-    rm -Recurse -Force $item.FullName
-}
-
-function force-mkdir($path) {
-    if (!(Test-Path $path)) {
-        #Write-Host "-- Creating full path to: " $path -ForegroundColor White -BackgroundColor DarkGreen
-        New-Item -ItemType Directory -Force -Path $path
+    Write-Output "Remove OneDrive"
+    if (Test-Path "$env:systemroot\System32\OneDriveSetup.exe") {
+        & "$env:systemroot\System32\OneDriveSetup.exe" /uninstall
     }
-}
+    if (Test-Path "$env:systemroot\SysWOW64\OneDriveSetup.exe") {
+        & "$env:systemroot\SysWOW64\OneDriveSetup.exe" /uninstall
+    }
+
+    Write-Output "Disable OneDrive via Group Policies"
+    ForceMakeDir "HKLM:\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\OneDrive"
+    Set-ItemProperty "HKLM:\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\OneDrive" "DisableFileSyncNGSC" 1
+
+    Write-Output "Removing OneDrive leftovers trash"
+    Remove-Item -Recurse -Force -ErrorAction SilentlyContinue "$env:localappdata\Microsoft\OneDrive"
+    Remove-Item -Recurse -Force -ErrorAction SilentlyContinue "$env:programdata\Microsoft OneDrive"
+    Remove-Item -Recurse -Force -ErrorAction SilentlyContinue "C:\OneDriveTemp"
+
+    Write-Output "Remove Onedrive from explorer sidebar"
+    New-PSDrive -PSProvider "Registry" -Root "HKEY_CLASSES_ROOT" -Name "HKCR"
+    mkdir -Force "HKCR:\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}"
+    Set-ItemProperty "HKCR:\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" "System.IsPinnedToNameSpaceTree" 0
+    mkdir -Force "HKCR:\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}"
+    Set-ItemProperty "HKCR:\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" "System.IsPinnedToNameSpaceTree" 0
+    Remove-PSDrive "HKCR"
+
+    Write-Output "Removing run option for new users"
+    reg load "hku\Default" "C:\Users\Default\NTUSER.DAT"
+    reg delete "HKEY_USERS\Default\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "OneDriveSetup" /f
+    reg unload "hku\Default"
+
+    Write-Output "Removing startmenu junk entry"
+    Remove-Item -Force -ErrorAction SilentlyContinue "$env:userprofile\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\OneDrive.lnk"
+
+    Write-Output "Restarting explorer..."
+    Start-Process "explorer.exe"
+
+    Write-Output "Wait for EX reload.."
+    Start-Sleep 15
+
+    Write-Output "Removing additional OneDrive leftovers"
+    foreach ($item in (Get-ChildItem "$env:WinDir\WinSxS\*onedrive*")) {
+        TakeownFolder $item.FullName
+        Remove-Item -Recurse -Force $item.FullName
+    }
+
+
 }
