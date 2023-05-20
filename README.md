@@ -1,4 +1,3 @@
-# devbox
+# Devbox
 
-Credits to: https://github.com/noelbundick/devbox
-WIP
+My system(s) seetings
