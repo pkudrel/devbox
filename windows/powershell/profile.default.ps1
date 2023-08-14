@@ -19,7 +19,7 @@
 ## DockerCompletion
 # Install-Module DockerCompletion -Scope CurrentUser
 
-
+[console]::InputEncoding = [console]::OutputEncoding = [System.Text.UTF8Encoding]::new()
 
 # helpers
 $workDir = "$env:USERPROFILE\!work"
@@ -43,7 +43,7 @@ if ($host.Name -eq 'ConsoleHost') {
     Set-PSReadLineKeyHandler -Key Tab -Function Complete
     Set-PSReadLineOption -HistoryNoDuplicates -EditMode Windows
     Set-PSReadLineOption -PredictionSource History
-    #Set-PSReadLineOption -PredictionViewStyle ListView
+    # Set-PSReadLineOption -PredictionViewStyle ListView
     Set-PSReadLineOption -PredictionViewStyle InlineView
     Set-PSReadLineOption -ShowToolTips
     Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward

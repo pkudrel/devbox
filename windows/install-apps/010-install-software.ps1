@@ -40,12 +40,13 @@ InstallPackage "Microsoft.Azure.StorageExplorer"
 InstallPackage "gerardog.gsudo"
 InstallPackage "7zip.7zip"
 InstallPackage "Microsoft.AzureCLI"
+InstallPackage "OpenJS.NodeJS"
 
 Install-Module PSReadLine -AllowPrerelease -Force
 
 # use this one - works better, for  dotnet-script
 (new-object Net.WebClient).DownloadString("https://raw.githubusercontent.com/dotnet-script/dotnet-script/master/install/install.ps1") | Invoke-Expression
 # dotnet tool install -g dotnet-script
-
+npm install -g @azure/static-web-apps-cli
 
 Write-host "Done"
