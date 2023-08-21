@@ -52,7 +52,7 @@ if ($host.Name -eq 'ConsoleHost') {
 }
 
 
-oh-my-posh init pwsh | Invoke-Expression
+#oh-my-posh init pwsh | Invoke-Expression
 oh-my-posh init pwsh --config "$workDir\DenebLab\devbox\windows\windows-terminal\paradox.omp.json" | Invoke-Expression
 
 function OpenPSProfileFile { code $Home\Documents\PowerShell\Profile.ps1 }
