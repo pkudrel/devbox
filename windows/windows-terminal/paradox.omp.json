@@ -27,7 +27,7 @@
             "properties": {
               "folder_icon": "\uf115",
               "folder_separator_icon": " \ue0b1 ",
-              "style": "full"
+              "style": "mixed"
             },
             "style": "powerline",
             "template": " {{ .Path }} ",

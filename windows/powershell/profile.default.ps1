@@ -39,6 +39,11 @@ Import-Module-With-Measure Terminal-Icons
 Import-Module-With-Measure DockerCompletion
 if ($host.Name -eq 'ConsoleHost') {
     # https://github.com/PowerShell/PSReadLine#install-from-powershellgallery-preferred
+    ## No profile: powershell -noprofile
+    ## Find all install versions: (Get-Module -ListAvailable PSReadLine*).path
+    ## INSTALL Run form powershell core
+    ## INSTALL: "C:\Program Files\PowerShell\7\pwsh.exe" -noprofile -command "Install-Module PSReadLine -AllowPrerelease -Force"
+    ## UPGRADE: "C:\Program Files\PowerShell\7\pwsh.exe" -noprofile -command "Update-Module PSReadLine -AllowPrerelease -Force"
     Import-Module-With-Measure PSReadLine
     Set-PSReadLineKeyHandler -Key Tab -Function Complete
     Set-PSReadLineOption -HistoryNoDuplicates -EditMode Windows
