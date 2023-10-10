@@ -1,18 +1,20 @@
 # Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted
 
 function InstallPackage($pack) {
-    
+   
+    $r1 = cmd /c winget list -e --id $pack | Out-String
+    if ($r1.ToLower().Contains("no installed package found matching input criteria") -eq $false  ) { 
+        Write-host "Package '$pack' is installed"
+        return;
+    } 
+
     $r1 = cmd /c winget search -e --id $pack | Out-String
     if ($r1.ToLower().Contains("no package found matching input criteria")) { 
         Write-host "Can't find package '$pack'"
         return;
     } 
 
-    $r1 = cmd /c winget list -e --id $pack | Out-String
-    if ($r1.ToLower().Contains("no installed package found matching input criteria") -eq $false  ) { 
-        Write-host "Package '$pack' is installed"
-        return;
-    } 
+   
     
 
     $r1 = cmd /c winget install --accept-package-agreements --accept-source-agreements -e --id $pack | Out-String
@@ -26,6 +28,8 @@ function InstallPackage($pack) {
 ####### BEGIN
 # InstallPackage "SMPlayer.SMPlayer" - not working
 
+InstallPackage "Bitwarden.Bitwarden"
+InstallPackage "Ghisler.TotalCommander"
 InstallPackage "Microsoft.DotNet.SDK.6"
 InstallPackage "Microsoft.DotNet.SDK.7"
 InstallPackage "Microsoft.PowerShell"
@@ -41,6 +45,9 @@ InstallPackage "gerardog.gsudo"
 InstallPackage "7zip.7zip"
 InstallPackage "Microsoft.AzureCLI"
 InstallPackage "OpenJS.NodeJS"
+InstallPackage "Bitwarden.CLI"
+InstallPackage "Git.Git"
+InstallPackage "Mozilla.Firefox"
 
 Install-Module PSReadLine -AllowPrerelease -Force
 
