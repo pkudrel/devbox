@@ -1,5 +1,0 @@
-Windows Registry Editor Version 5.00
-;This creates the UndockingDisabled entry to enable the Taskbar to show Taskbar Toolbars again
-; Windows must be restarted for the change to take effect
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell\Update\Packages]
-"UndockingDisabled"=dword:00000001

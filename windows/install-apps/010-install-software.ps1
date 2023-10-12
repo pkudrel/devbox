@@ -2,6 +2,8 @@
 
 function InstallPackage($pack) {
    
+    Write-host "Process: '$pack'"
+
     $r1 = cmd /c winget list -e --id $pack | Out-String
     if ($r1.ToLower().Contains("no installed package found matching input criteria") -eq $false  ) { 
         Write-host "Package '$pack' is installed"
@@ -48,6 +50,7 @@ InstallPackage "OpenJS.NodeJS"
 InstallPackage "Bitwarden.CLI"
 InstallPackage "Git.Git"
 InstallPackage "Mozilla.Firefox"
+InstallPackage "tailscale.tailscale"
 
 Install-Module PSReadLine -AllowPrerelease -Force
 
