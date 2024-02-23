@@ -56,55 +56,6 @@ if ($host.Name -eq 'ConsoleHost') {
     Set-PSReadLineKeyHandler -Chord "Ctrl+RightArrow" -Function ForwardWord
 }
 
-
 #oh-my-posh init pwsh | Invoke-Expression
 oh-my-posh init pwsh --config "$workDir\DenebLab\devbox\windows\windows-terminal\paradox.omp.json" | Invoke-Expression
 
-function OpenPSProfileFile { code $Home\Documents\PowerShell\Profile.ps1 }
-function DockerKillContainerFn ([string]$ContainerName) {
-    #Write-Host $ContainerName
-    $output = docker.exe ps --filter name=$ContainerName --quiet | Format-List -Property "CONTAINER ID" | out-string
-    $conteinerId = $output.Trim()
-    if ([string]::IsNullOrEmpty($conteinerId)) {
-        Write-Host "Cannot find container with name '$ContainerName'"
-    }
-    else {
-        docker kill $conteinerId
-    }
-   
-}
-
-function ssh-copy-id([string]$userAtMachine){   
-    $publicKey = "$ENV:USERPROFILE" + "/.ssh/id_rsa.pub"
-    $publicKeySrc = Get-Content -Path $publicKey
-    Write-Host "ssh-copy-id; Dst: $userAtMachine; "
-    Write-Host "ssh-copy-id; PublickeyFile: $publicKey"
-    Write-Host "ssh-copy-id; PublickeySrc: $publicKeySrc"
-    if (!(Test-Path "$publicKey")){
-        Write-Error "ERROR: failed to open ID file '$publicKey': No such file"            
-    }
-    else {
-        & cat "$publicKey" | ssh $userAtMachine "umask 077; test -d .ssh || mkdir .ssh ; cat >> .ssh/authorized_keys || exit 1"      
-        Write-Host "ssh-copy-id; Done"
-    }
-}
-
-function ssh-copy-id-file([string]$userAtMachine, [string]$file ){   
-    $publicKey = $file
-    $publicKeySrc = Get-Content -Path $publicKey
-    Write-Host "ssh-copy-id-file; Dst: $userAtMachine; "
-    Write-Host "ssh-copy-id-file; PublickeyFile: $publicKey"
-    Write-Host "ssh-copy-id-file; PublickeySrc: $publicKeySrc"
-    if (!(Test-Path "$publicKey")){
-        Write-Error "ERROR: failed to open ID file '$publicKey': No such file"            
-    }
-    else {
-        & cat "$publicKey" | ssh $userAtMachine "umask 077; test -d .ssh || mkdir .ssh ; cat >> .ssh/authorized_keys || exit 1"      
-        Write-Host "ssh-copy-id-file; Done"
-    }
-}
-
-## Aliases
-
-Set-Alias psProfile OpenPSProfileFile -Option ReadOnly
-Set-Alias dkKillContainer DockerKillContainerFn -Option ReadOnly
