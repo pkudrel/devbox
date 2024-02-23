@@ -1,3 +1,0 @@
-New-ItemProperty   'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders' Personal -Value 'W:\deneblab\devbox\windows\powershell' -Type ExpandString -Force
-New-ItemProperty   'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders' Desktop -Value '%USERPROFILE%\Desktop' -Type ExpandString -Force
-New-ItemProperty   'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders' "My Pictures" -Value '%USERPROFILE%\Pictures' -Type ExpandString -Force

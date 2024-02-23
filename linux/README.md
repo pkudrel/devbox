@@ -2,6 +2,5 @@
 
 ## Quick setup
 
-```bash
-curl https://raw.githubusercontent.com/noelbundick/devbox/master/linux/init.sh | sudo bash
-```
+- install zsh
+- install https://dev.to/abdfnx/oh-my-zsh-powerlevel10k-cool-terminal-1no0
