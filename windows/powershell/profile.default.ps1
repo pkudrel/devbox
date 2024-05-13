@@ -138,6 +138,34 @@ function bw-open([string]$machineProfile) {
     Write-Output "BWS_ACCESS_TOKEN is set"
 }
 
+function pulumi-profile([string]$profile){
+    if($profile -eq ""){
+        Write-Host "Profile name argument missing."
+        return
+    }
+ 
+    pulumi logout
+    $env:PULUMI_ACCESS_TOKEN = ""
+    if($profile -eq "local"){
+        pulumi login --local --non-interactive
+        return
+    }
+    elseif($profile -eq "antipiracy"){
+        $token = bws secret list | jq -r '.[] | select(.key == "pulumi-antipiracy") | .value'
+        $env:PULUMI_ACCESS_TOKEN = $token
+    }
+    elseif($profile -eq "deneblab"){
+        $token = bws secret list | jq -r '.[] | select(.key == "pulumi-deneblab") | .value'
+        $env:PULUMI_ACCESS_TOKEN = $token
+    }
+    else{
+        Write-Host "Unknown profile"
+        return
+    }
+    pulumi login --non-interactive
+    pulumi whoami -v
+}
+
 ## Aliases
 
 Set-Alias psProfile OpenPSProfileFile -Option ReadOnly

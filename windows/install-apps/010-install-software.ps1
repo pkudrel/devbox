@@ -53,6 +53,7 @@ InstallPackage "Git.Git"
 InstallPackage "Mozilla.Firefox"
 InstallPackage "tailscale.tailscale"
 InstallPackage "RoslynPad.RoslynPad"
+InstallPackage "jqlang.jq"
 
 Install-Module PSReadLine -AllowPrerelease -Force
 
