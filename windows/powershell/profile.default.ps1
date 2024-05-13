@@ -107,6 +107,10 @@ function ssh-copy-id-file([string]$userAtMachine, [string]$file ) {
 ## Open Bitwarden session and set BWS_ACCESS_TOKEN
 function bw-open([string]$machineProfile) {
 
+    if ( $env:BWS_ACCESS_TOKEN -ne "") {
+        Write-Output "Warning: BWS_ACCESS_TOKEN is not empty."
+    }
+
     Write-Output $env:BWS_ACCESS_TOKEN
     $defaultProfile = "bw-sm-zenpk"
     if ($machineProfile -eq "") {
@@ -130,6 +134,7 @@ function bw-open([string]$machineProfile) {
     $bwsAccessToken = bw get password $machineProfile
     Write-Output ""
     $env:BWS_ACCESS_TOKEN = $bwsAccessToken
+    [System.Environment]::SetEnvironmentVariable("BWS_ACCESS_TOKEN", $bwsAccessToken, "User")
     Write-Output "BWS_ACCESS_TOKEN is set"
 }
 
