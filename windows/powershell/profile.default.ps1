@@ -129,7 +129,6 @@ function bw-open([string]$machineProfile) {
     bw sync
     $bwsAccessToken = bw get password $machineProfile
     Write-Output ""
-    Write-Output $bwsAccessToken
     $env:BWS_ACCESS_TOKEN = $bwsAccessToken
     Write-Output "BWS_ACCESS_TOKEN is set"
 }
