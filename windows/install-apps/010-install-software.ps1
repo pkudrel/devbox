@@ -52,8 +52,8 @@ InstallPackage "Bitwarden.CLI"
 InstallPackage "Git.Git"
 InstallPackage "Mozilla.Firefox"
 InstallPackage "tailscale.tailscale"
-InstallPackage "RoslynPad.RoslynPad"
 InstallPackage "jqlang.jq"
+InstallPackage "Google.Drive"
 
 Install-Module PSReadLine -AllowPrerelease -Force
 
