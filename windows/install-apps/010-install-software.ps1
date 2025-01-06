@@ -54,6 +54,7 @@ InstallPackage "tailscale.tailscale"
 InstallPackage "jqlang.jq"
 InstallPackage "Google.Drive"
 InstallPackage "Brave.Brave"
+InstallPackage "Task.Task"
 
 Install-Module PSReadLine -AllowPrerelease -Force
 

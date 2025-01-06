@@ -166,7 +166,10 @@ function pulumi-profile([string]$profile){
     pulumi whoami -v
 }
 
+Invoke-Expression  (&task --completion powershell | Out-String)
+
 ## Aliases
 
 Set-Alias psProfile OpenPSProfileFile -Option ReadOnly
 Set-Alias dkKillContainer DockerKillContainerFn -Option ReadOnly
+Set-Alias t task
