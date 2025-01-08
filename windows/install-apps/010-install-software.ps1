@@ -55,6 +55,7 @@ InstallPackage "jqlang.jq"
 InstallPackage "Google.Drive"
 InstallPackage "Brave.Brave"
 InstallPackage "Task.Task"
+InstallPackage "Helm.Helm"
 
 Install-Module PSReadLine -AllowPrerelease -Force
 

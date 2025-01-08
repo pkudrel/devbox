@@ -165,7 +165,7 @@ function pulumi-profile([string]$profile){
     pulumi login --non-interactive
     pulumi whoami -v
 }
-## Misc
+#### Misc ####
 
 # Task https://taskfile.dev/
 Invoke-Expression  (&task --completion powershell | Out-String)
@@ -174,3 +174,5 @@ Invoke-Expression  (&task --completion powershell | Out-String)
 Set-Alias psProfile OpenPSProfileFile -Option ReadOnly
 Set-Alias dkKillContainer DockerKillContainerFn -Option ReadOnly
 Set-Alias t task
+
+Invoke-Expression  (&t --completion powershell | Out-String)
